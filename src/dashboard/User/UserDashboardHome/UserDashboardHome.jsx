@@ -4,7 +4,7 @@ const UserDashboardHome = () => {
   const [appointmentData, setAppointmentData] = useState([]);
 
   useEffect(() => {
-    fetch("data.json")
+    fetch("http://localhost:5000/Appointments")
       .then((res) => res.json())
       .then((data) => setAppointmentData(data));
   }, []);
