@@ -1,14 +1,56 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { FaLock, FaPhone, FaUser } from "react-icons/fa6";
 import { MdMail } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigation } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Registration = () => {
-  const handleRegistration = (event) => {};
+  const [registrationError, setRegistrationError] = useState("");
+  const { createUser } = useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigation();
+  const from = location.state?.from?.pathname || "/login";
+
+  const handleRegistration = (event) => {
+    event.preventDefault();
+    const form = event.target;
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+    const password = form.password.value;
+
+    createUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        updateUserProfile(name);
+        console.log(loggedUser);
+        form.reset();
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+
+        if (errorCode === "auth/weak-password") {
+          setRegistrationError(
+            "Password is too weak. Please Provide a strong password"
+          );
+        }
+
+        if (errorCode === "auth/email-already-in-use") {
+          setRegistrationError(
+            "Email is already used. please provide a new email address."
+          );
+        }
+      });
+  };
   return (
     <div className="max-w-screen-md m-auto">
       <div className="bg-[#4A36FF] rounded-3xl py-20 border">
-        <h1 className="text-4xl text-center mb-6 text-white">Registration Form</h1>
+        <h1 className="text-4xl text-center mb-6 text-white">
+          Registration Form
+        </h1>
         <p className="text-xl text-center mb-5 text-white">
           How to i get started with Shakil Medical
         </p>
