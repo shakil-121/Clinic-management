@@ -1,0 +1,32 @@
+[
+  {
+    "name": "John Doe",
+    "phone": "123-456-7890",
+    "appointment_date": "2024-07-10",
+    "time": "09:00 AM"
+  },
+  {
+    "name": "Jane Smith",
+    "phone": "987-654-3210",
+    "appointment_date": "2024-07-11",
+    "time": "10:00 AM"
+  },
+  {
+    "name": "Alice Johnson",
+    "phone": "555-123-4567",
+    "appointment_date": "2024-07-12",
+    "time": "11:00 AM"
+  },
+  {
+    "name": "Bob Brown",
+    "phone": "444-987-6543",
+    "appointment_date": "2024-07-13",
+    "time": "01:00 PM"
+  },
+  {
+    "name": "Carol White",
+    "phone": "333-789-0123",
+    "appointment_date": "2024-07-14",
+    "time": "02:00 PM"
+  }
+]

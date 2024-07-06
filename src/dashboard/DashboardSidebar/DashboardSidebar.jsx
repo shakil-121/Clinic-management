@@ -20,7 +20,7 @@ const DashboardSidebar = () => {
         </div>
 
         <li>
-          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/dashboard">Appointment</Link>
         </li>
         <li>
           <Link
