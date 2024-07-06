@@ -77,12 +77,29 @@ const Navber = () => {
         </ul>
       </div>
       <div class="navbar-end">
-        <button className="px-8  py-2  rounded-3xl bg-[#4a36ff] border-none text-white uppercase">
-          <span className="flex items-center">
-            Login {loggedUser?.email}
-            <FaCircleChevronRight />
-          </span>
-        </button>
+        {loggedUser ? (
+          <>
+            <Link to="dashboard">
+              <button className="px-8  py-2  rounded-3xl bg-[#4a36ff] border-none text-white uppercase">
+                <span className="flex items-center">
+                  Dashboard
+                  <FaCircleChevronRight />
+                </span>
+              </button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to="login">
+              <button className="px-8  py-2  rounded-3xl bg-[#4a36ff] border-none text-white uppercase">
+                <span className="flex items-center">
+                  Login
+                  <FaCircleChevronRight />
+                </span>
+              </button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
