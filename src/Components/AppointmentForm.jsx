@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { FaAddressCard, FaPhone, FaUser } from "react-icons/fa6";
+import { MdMail } from "react-icons/md";
 
 const AppointmentForm = ({ isVisible, onClose }) => {
+  const { loggedUser } = useContext(AuthContext);
   if (!isVisible) return null;
+
+  const handleBooking = (event) => {};
   return (
-    <div className="fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
+    <div className="fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-20">
       <div className=" flex flex-col">
         <button
           onClick={() => onClose()}
@@ -25,11 +31,8 @@ const AppointmentForm = ({ isVisible, onClose }) => {
           </svg>
         </button>
         <div className="bg-gray-300 py-14 px-10 rounded-lg">
-          <h1 className="text-2xl text-center font-semibold mb-5">
-            {/* {room?.room_name} */}
-            Rabbi Mia
-          </h1>
-          {/* <form
+          <h1 className="text-2xl text-center font-semibold mb-5"></h1>
+          <form
             className="text-center w-full"
             onSubmit={handleBooking}
             action=""
@@ -47,16 +50,25 @@ const AppointmentForm = ({ isVisible, onClose }) => {
                 <FaUser className="absolute ml-3" />
               </div>
 
-              <div className="flex items-center">
-                <input
-                  type="email"
-                  name="email"
-                  value={loggedUser?.email}
-                  placeholder="Email"
-                  className="pl-8 py-3 rounded-xl w-[100%] bg-[#F0EDFF]"
-                  required
-                />
-                <MdMail className="absolute ml-3" />
+              <div className="dropdown">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn m-1 pl-8 py-3 rounded-xl w-[100%] bg-[#F0EDFF]"
+                >
+                  Select Time
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                >
+                  <li>
+                    <a>Morning 10:00 AM</a>
+                  </li>
+                  <li>
+                    <a>Evening 06:00 PM</a>
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -73,38 +85,15 @@ const AppointmentForm = ({ isVisible, onClose }) => {
               </div>
               <div className="flex items-center">
                 <input
-                  type="tel"
-                  name="NID"
-                  placeholder="NID"
                   className="pl-8 py-3 rounded-xl w-[100%] bg-[#F0EDFF]"
-                  required
+                  type="date"
+                  name=""
+                  id=""
                 />
-                <FaAddressCard className="absolute ml-3" />
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              <div className="mt-5">
-                <label className="flex font-semibold">FROM</label>
-                <input
-                  className=" p-4 py-3 rounded-xl w-[100%] bg-[#F0EDFF]"
-                  type="date"
-                  value={selectedFromDate.toISOString().substring(0, 10)}
-                  onChange={handleFromDataChange}
-                  required
-                />
-              </div>
-              <div className="mt-5">
-                <label className="flex font-semibold">TO</label>
-                <input
-                  className=" p-4 py-3 rounded-xl w-[100%] bg-[#F0EDFF]"
-                  type="date"
-                  value={selectedToDate.toISOString().substring(0, 10)}
-                  onChange={handleToDataChange}
-                  required
-                />
-              </div>
-            </div>
+            <div className="grid grid-cols-2 gap-2"></div>
 
             <div>
               <input
@@ -113,7 +102,7 @@ const AppointmentForm = ({ isVisible, onClose }) => {
                 value="Book Now"
               />
             </div>
-          </form> */}
+          </form>
         </div>
       </div>
     </div>

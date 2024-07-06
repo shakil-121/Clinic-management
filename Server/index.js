@@ -28,34 +28,22 @@ async function run() {
     const allAppointment = client
       .db("clinic_management")
       .collection("appointmenets");
+    const allUsers = client.db("clinic_management").collection("users");
 
     //   const allBookings = client.db("Hotel_Management").collection("bookings");
-    //   const allUsers = client.db("Hotel_Management").collection("users");
 
     app.get("/Appointments", async (req, res) => {
       const result = await allAppointment.find().toArray();
       res.send(result);
     });
 
-    //   app.get("/bookings", async (req, res) => {
-    //     const result = await allBookings.find().toArray();
-    //     res.send(result);
-    //   });
+    app.post("/users", async (req, res) => {
+      const user = req.body;
+      console.log(user);
 
-    //   app.post("/booking", async (req, res) => {
-    //     const booking = req.body;
-
-    //     const result = await allBookings.insertOne(booking);
-    //     res.send(result);
-    //   });
-
-    //   app.post("/users", async (req, res) => {
-    //     const user = req.body;
-    //     console.log(user);
-
-    //     const result = await allUsers.insertOne(user);
-    //     res.send(result);
-    //   });
+      const result = await allUsers.insertOne(user);
+      res.send(result);
+    });
 
     //   app.put("/bookings/:id", async (req, res) => {
     //     const id = req.params.id;

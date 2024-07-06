@@ -6,6 +6,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const DashboardSidebar = () => {
   const { logOut, loggedUser } = useContext(AuthContext);
+  console.log(loggedUser);
 
   return (
     <div className="h-full">
@@ -15,7 +16,7 @@ const DashboardSidebar = () => {
             <FaUserTie />
           </div>
           <p className="text-center text-2xl font-semibold mt-4">
-            {loggedUser?.email}
+            {loggedUser?.displayName}
           </p>
         </div>
 

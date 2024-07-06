@@ -6,7 +6,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Registration = () => {
   const [registrationError, setRegistrationError] = useState("");
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigation();
@@ -21,29 +21,41 @@ const Registration = () => {
     const phone = form.phone.value;
     const password = form.password.value;
 
-    createUser(email, password)
-      .then((result) => {
-        const loggedUser = result.user;
-        updateUserProfile(name);
-        console.log(loggedUser);
-        form.reset();
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
+    const userInfo = {
+      name: name,
+      email: email,
+      phone: phone,
+      role: "patient",
+    };
 
-        if (errorCode === "auth/weak-password") {
-          setRegistrationError(
-            "Password is too weak. Please Provide a strong password"
-          );
-        }
+    createUser(email, password).then((result) => {
+      const loggedUser = result.user;
+      updateUserProfile(name);
+      console.log(loggedUser);
+      form.reset();
+      navigate(from, { replace: true });
+    });
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
+    }).catch((error) => {
+      const errorCode = error.code;
 
-        if (errorCode === "auth/email-already-in-use") {
-          setRegistrationError(
-            "Email is already used. please provide a new email address."
-          );
-        }
-      });
+      if (errorCode === "auth/weak-password") {
+        setRegistrationError(
+          "Password is too weak. Please Provide a strong password"
+        );
+      }
+
+      if (errorCode === "auth/email-already-in-use") {
+        setRegistrationError(
+          "Email is already used. please provide a new email address."
+        );
+      }
+    });
   };
   return (
     <div className="max-w-screen-md m-auto">
