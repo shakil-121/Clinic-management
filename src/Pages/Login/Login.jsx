@@ -1,74 +1,54 @@
+import React from "react";
+import { FaLock, FaUser } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
-// import React from 'react'; 
-// import { Link } from "react-router-dom"; 
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-// import Lottie from "lottie-react";
-// import { FaGoogle } from "react-icons/fa";
-// import loginAnimation from "../../assets/login.json";
-// import logo from "../../assets/logo2.png"
+const Login = () => {
+  const handleLogin = (event = {});
+  return (
+    <div className="max-w-screen-md m-auto py-24 shadow-lg px-10 rounded-md bg-[#4A36FF] mt-20">
+      <form className="text-center w-full" onSubmit={handleLogin} action="">
+        <div className="flex items-center">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="pl-8 py-3 rounded-xl w-[100%] bg-[#F0EDFF]"
+            required
+          />
 
+          <FaUser className="absolute ml-3" />
+        </div>
+        <div className="flex items-center mt-5">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="pl-8 py-3 rounded-xl w-[100%] bg-[#F0EDFF]"
+            required
+          />
+          <FaLock className="absolute ml-3" />
+        </div>
 
-// const Login = () => { 
-//     return (
-//         <div>
-//         <div className="hero w-full mt-24 min-h-screen rounded-lg bg-base-200">
-//         <div className="hero-content w-4/6 flex-col py-4  lg:flex-row">
-//           <div className="text-center md:w-1/2 lg:text-left">
-//             <Lottie animationData={loginAnimation} loop={true} />
-//           </div>
-          
-//           <div className="card flex-shrink-0 md:w-1/2  shadow-2xl bg-base-100">
-            
-//             <form  className="card-body">
-//               <div className='bg-indigo-700  rounded-xl'> 
-//                 <img className='h-24 w-auto mx-auto' src={logo} alt="" />
-//               <h1 className="text-3xl pb-5 font-bold text-center text-white">Login Form</h1>
-//               </div>
-//               <div className="form-control">
-//                 <label className="label">
-//                   <span className="label-text">Email</span>
-//                 </label>
-//                 <input 
-               
-//                   name="email"
-//                   type="text"
-//                   placeholder="email"
-//                   className="input input-bordered"
-//                 />
-//               </div>
-//               <div className="form-control">
-//                 <label className="label">
-//                   <span className="label-text">Password</span>
-//                 </label>
-//                 <input
-//                   name="password"
-//                   type="password"
-//                   placeholder="password"
-//                   className="input input-bordered"
-//                 />
-//                 {/* <label className="label">
-//                   <Link onClick={handelResetPassword}><p className="text-blue-600"> Forgot password?</p></Link>
-//                 </label> */}
-//               </div>
-//               <div className="form-control mt-6">
-//                 <button className="btn bg-[#050931] border-none text-white hover:text-black">Login</button>
-//               </div>  
-//               <p className="text-center text-red-600">{error}</p>
-//               <p className="text-center">Or Sign-in with</p>
-//               <div className="flex text-center gap-8 py-4 justify-center">
-//                   <Link><FaGoogle  className="h-6 w-6"></FaGoogle></Link> 
-//                   {/* <Link onClick={handleSigninGithub}><FaGithub  className="h-6 w-6"></FaGithub></Link>  */}
-//               </div>
-//             </form>
-//               <p className="text-center pb-6">Are you New?<Link className="text-blue-600 ps-2" to='/signup'>Registration</Link></p>
-//           </div>
-//         </div>
-//       </div>
-  
-//         <ToastContainer />
-//       </div>
-//     );
-// };
+        <div className="flex justify-center">
+          <p className="bg-white mt-4 text-red-500 px-4"></p>
+        </div>
 
-// export default Login;
+        <div>
+          <input
+            className="text-xl bg-white uppercase px-6 py-2 rounded-md text-black hover:bg-yellow-300 hover:text-black mt-5 font-semibold"
+            type="submit"
+            value="Login"
+          />
+        </div>
+      </form>
+      <div className="flex items-center justify-center gap-3 mt-3 text-white">
+        <p>Are You New to Shakil Medical?</p>
+        <Link to="/registration" className="text-xl text-white font-semibold">
+          Registration
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
