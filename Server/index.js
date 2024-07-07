@@ -53,27 +53,27 @@ async function run() {
       res.send(result);
     });
 
-    //   app.put("/bookings/:id", async (req, res) => {
-    //     const id = req.params.id;
-    //     const Status = req.body;
-    //     console.log(updateStatus, id);
+    app.put("/Appointments/:id", async (req, res) => {
+      const id = req.params.id;
+      const Status = req.body;
+      console.log(Status, id);
 
-    //     const filter = { _id: new ObjectId(id) };
+      const filter = { _id: new ObjectId(id) };
 
-    //     const option = { upsert: true };
-    //     const updateStatus = {
-    //       $set: {
-    //         status: Status.status,
-    //       },
-    //     };
+      const option = { upsert: true };
+      const updateStatus = {
+        $set: {
+          status: Status.status,
+        },
+      };
 
-    //     const result = await orderCollection.updateOne(
-    //       filter,
-    //       updateStatus,
-    //       option
-    //     );
-    //     res.send(result);
-    //   });
+      const result = await allAppointment.updateOne(
+        filter,
+        updateStatus,
+        option
+      );
+      res.send(result);
+    });
 
     //
 

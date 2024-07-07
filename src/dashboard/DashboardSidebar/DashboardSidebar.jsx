@@ -8,6 +8,8 @@ const DashboardSidebar = () => {
   const { logOut, loggedUser } = useContext(AuthContext);
   console.log(loggedUser);
 
+  const role = "user";
+
   return (
     <div className="h-full">
       <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
@@ -20,18 +22,27 @@ const DashboardSidebar = () => {
           </p>
         </div>
 
-        <li>
-          <Link to="/dashboard">Appointment</Link>
-        </li>
-        <li>
-          <Link to="/dashboard">Patient</Link>
-        </li>
-        <li>
-          <Link to="userHistory">History</Link>
-        </li>
-        <li>
-          <Link to="/dashboard">Ad_History</Link>
-        </li>
+        {role === "user" ? (
+          <>
+            <li>
+              <Link to="/dashboard">Patient</Link>
+            </li>
+            <li>
+              <Link to="userHistory">History</Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/dashboard">Appointment</Link>
+            </li>
+
+            <li>
+              <Link to="/dashboard">Ad_History</Link>
+            </li>
+          </>
+        )}
+
         <li>
           <Link
             onClick={() => {
