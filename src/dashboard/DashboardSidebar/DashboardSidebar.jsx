@@ -5,16 +5,16 @@ import { FaUserTie } from "react-icons/fa";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const DashboardSidebar = () => {
-  const [appointmentData, setAppointmentData] = useState([]);
+  const [users, setAllUser] = useState([]);
   const { logOut, loggedUser } = useContext(AuthContext);
-  console.log(loggedUser);
+  // console.log(loggedUser);
 
-  const role = appointmentData.role;
+  const role = users.role;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/Appointments/${loggedUser?.email}`)
+    fetch(`http://localhost:5000/users/${loggedUser?.email}`)
       .then((res) => res.json())
-      .then((data) => setAppointmentData(data));
+      .then((data) => setAllUser(data));
   }, []);
 
   return (
@@ -32,7 +32,7 @@ const DashboardSidebar = () => {
         {role === "patient" ? (
           <>
             <li>
-              <Link to="/dashboard">Patient</Link>
+              <Link to="dashboard">Patient</Link>
             </li>
             <li>
               <Link to="userHistory">History</Link>

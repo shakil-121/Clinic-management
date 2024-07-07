@@ -89,34 +89,7 @@ const UserDashboardHome = () => {
                   <option value="04:00 PM">Canceled</option>
                 </select> */}
 
-                <div className="dropdown dropdown-bottom text-black">
-                  <label tabIndex={0} className="">
-                    <button className="btn btn-error">{data.status}</button>
-                  </label>
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100  w-48"
-                  >
-                    <li onClick={() => handleStatusUpdate("Pending", data._id)}>
-                      <a>Pending</a>
-                    </li>
-                    <li
-                      onClick={() => handleStatusUpdate("Confirmed", data._id)}
-                    >
-                      <a>Confirmed</a>
-                    </li>
-                    <li
-                      onClick={() => handleStatusUpdate("Canceled", data._id)}
-                    >
-                      <a>Canceled</a>
-                    </li>
-                    <li
-                      onClick={() => handleStatusUpdate("Completed", data._id)}
-                    >
-                      <a>Checked-In</a>
-                    </li>
-                  </ul>
-                </div>
+                {data.status}
               </td>
             </tr>
           </tbody>

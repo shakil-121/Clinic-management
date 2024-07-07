@@ -32,6 +32,20 @@ async function run() {
 
     //   const allBookings = client.db("Hotel_Management").collection("bookings");
 
+    app.get("/users/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      console.log(email);
+
+      const result = await allUsers.findOne(query);
+      res.send(result);
+    });
+
+    app.get("/users", async (req, res) => {
+      const result = await allUsers.find().toArray();
+      res.send(result);
+    });
+
     app.get("/Appointments", async (req, res) => {
       const result = await allAppointment.find().toArray();
       res.send(result);
