@@ -32,7 +32,7 @@ const DashboardSidebar = () => {
         {role === "patient" ? (
           <>
             <li>
-              <Link to="dashboard">Patient</Link>
+              <Link to="">Patient</Link>
             </li>
             <li>
               <Link to="userHistory">History</Link>
