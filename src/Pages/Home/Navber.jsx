@@ -54,7 +54,7 @@ const Navber = () => {
         </Link>
       </div>
       <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1">
+        {/* <ul class="menu menu-horizontal px-1">
           <li>
             <a>About</a>
           </li>
@@ -74,7 +74,7 @@ const Navber = () => {
           <li>
             <a>Contact</a>
           </li>
-        </ul>
+        </ul> */}
       </div>
       <div class="navbar-end">
         {loggedUser ? (

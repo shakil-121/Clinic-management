@@ -24,6 +24,15 @@ const DashboardSidebar = () => {
           <Link to="/dashboard">Appointment</Link>
         </li>
         <li>
+          <Link to="/dashboard">Patient</Link>
+        </li>
+        <li>
+          <Link to="userHistory">History</Link>
+        </li>
+        <li>
+          <Link to="/dashboard">Ad_History</Link>
+        </li>
+        <li>
           <Link
             onClick={() => {
               logOut();

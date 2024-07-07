@@ -45,6 +45,14 @@ async function run() {
       res.send(result);
     });
 
+    app.post("/appointment", async (req, res) => {
+      const appointment = req.body;
+      console.log(appointment);
+
+      const result = await allAppointment.insertOne(appointment);
+      res.send(result);
+    });
+
     //   app.put("/bookings/:id", async (req, res) => {
     //     const id = req.params.id;
     //     const Status = req.body;
@@ -67,13 +75,7 @@ async function run() {
     //     res.send(result);
     //   });
 
-    //   app.delete("/alltoys/:id", async (req, res) => {
-    //     const id = req.params.id;
-    //     // console.log(id);
-    //     const query = { _id: new ObjectId(id) };
-    //     const result = await alltoysCollection.deleteOne(query);
-    //     res.send(result);
-    //   });
+    //
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

@@ -2,12 +2,51 @@ import React, { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaAddressCard, FaPhone, FaUser } from "react-icons/fa6";
 import { MdMail } from "react-icons/md";
+import { ToastContainer } from "react-toastify";
+import Swal from "sweetalert2";
 
 const AppointmentForm = ({ isVisible, onClose }) => {
   const { loggedUser } = useContext(AuthContext);
   if (!isVisible) return null;
 
-  const handleBooking = (event) => {};
+  const userEmail = loggedUser?.email;
+
+  const handleBooking = (event) => {
+    event.preventDefault();
+    const form = event.target;
+
+    const name = form.elements.name.value;
+    const phone = form.elements.phone.value;
+    const time = form.elements.time.value;
+    const date = form.elements.date.value;
+
+    const appointmentData = {
+      name: name,
+      phone: phone,
+      time: time,
+      date: date,
+      userEmail: userEmail,
+      status: "Pending",
+    };
+
+    fetch("http://localhost:5000/appointment", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(appointmentData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        Swal.fire({
+          title: "Booking Confirmed",
+          text: "Welcome to the Hotel Relax",
+          icon: "success",
+        });
+        form.reset();
+      });
+  };
+
   return (
     <div className="fixed inset-0 bg-black  bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-20">
       <div className=" flex flex-col">
@@ -51,24 +90,17 @@ const AppointmentForm = ({ isVisible, onClose }) => {
               </div>
 
               <div className="dropdown">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn m-1 pl-8 py-3 rounded-xl w-[100%] bg-[#F0EDFF]"
+                <select
+                  className="pl-8 py-3 rounded-xl w-[100%] bg-[#F0EDFF]"
+                  name="time"
+                  id="time"
                 >
-                  Select Time
-                </div>
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
-                >
-                  <li>
-                    <a>Morning 10:00 AM</a>
-                  </li>
-                  <li>
-                    <a>Evening 06:00 PM</a>
-                  </li>
-                </ul>
+                  <option defaultValue="Select Time">Select Time</option>
+                  <option value="10:00 AM">10:00 AM</option>
+                  <option value="12:00 PM">12:00 PM</option>
+                  <option value="04:00 PM">04:00 PM</option>
+                  <option value="07:00 PM">07:00 PM</option>
+                </select>
               </div>
             </div>
 
@@ -87,7 +119,7 @@ const AppointmentForm = ({ isVisible, onClose }) => {
                 <input
                   className="pl-8 py-3 rounded-xl w-[100%] bg-[#F0EDFF]"
                   type="date"
-                  name=""
+                  name="date"
                   id=""
                 />
               </div>
@@ -97,7 +129,7 @@ const AppointmentForm = ({ isVisible, onClose }) => {
 
             <div>
               <input
-                className="text-xl bg-[#bf9b79] px-6 py-2 rounded-md text-white hover:bg-[#dbb28c] hover:text-black mt-5"
+                className="text-xl bg-[#4a36ff] px-6 py-2 rounded-md text-white hover:bg-[#3c28ee] hover:text-white mt-5"
                 type="submit"
                 value="Book Now"
               />
@@ -105,6 +137,7 @@ const AppointmentForm = ({ isVisible, onClose }) => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
