@@ -37,6 +37,15 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/Appointments/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { userEmail: email };
+      console.log(email);
+
+      const result = await allAppointment.find(query).toArray();
+      res.send(result);
+    });
+
     app.post("/users", async (req, res) => {
       const user = req.body;
       console.log(user);

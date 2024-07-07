@@ -1,14 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { AuthContext } from "../../authProvider/AuthProvider";
 import { FaUserTie } from "react-icons/fa";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const DashboardSidebar = () => {
+  const [appointmentData, setAppointmentData] = useState([]);
   const { logOut, loggedUser } = useContext(AuthContext);
   console.log(loggedUser);
 
-  const role = "user";
+  const role = appointmentData.role;
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/Appointments/${loggedUser?.email}`)
+      .then((res) => res.json())
+      .then((data) => setAppointmentData(data));
+  }, []);
 
   return (
     <div className="h-full">
@@ -22,7 +29,7 @@ const DashboardSidebar = () => {
           </p>
         </div>
 
-        {role === "user" ? (
+        {role === "patient" ? (
           <>
             <li>
               <Link to="/dashboard">Patient</Link>
@@ -34,11 +41,11 @@ const DashboardSidebar = () => {
         ) : (
           <>
             <li>
-              <Link to="/dashboard">Appointment</Link>
+              <Link to="adminDashboard">Appointment</Link>
             </li>
 
             <li>
-              <Link to="/dashboard">Ad_History</Link>
+              <Link to="history">Ad_History</Link>
             </li>
           </>
         )}

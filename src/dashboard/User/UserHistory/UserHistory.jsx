@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppointmentForm from "../../../Components/AppointmentForm";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const UserHistory = () => {
   const [appointmentData, setAppointmentData] = useState([]);
   const [statusId, sethandleStatusId] = useState();
+
+  const { loggedUser } = useContext(AuthContext);
 
   const Appointments = appointmentData.filter(
     (appointment) =>
@@ -11,7 +14,7 @@ const UserHistory = () => {
   );
 
   useEffect(() => {
-    fetch("http://localhost:5000/Appointments")
+    fetch(`http://localhost:5000/Appointments/${loggedUser?.email}`)
       .then((res) => res.json())
       .then((data) => setAppointmentData(data));
   }, [1]);

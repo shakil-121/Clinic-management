@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppointmentForm from "../../../Components/AppointmentForm";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const UserDashboardHome = () => {
   const [appointmentData, setAppointmentData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [appointmentId, setAppointmentId] = useState(null);
+
+  const { loggedUser } = useContext(AuthContext);
 
   const Appointments = appointmentData.filter(
     (appointment) =>
@@ -12,10 +15,10 @@ const UserDashboardHome = () => {
   );
 
   useEffect(() => {
-    fetch("http://localhost:5000/Appointments")
+    fetch(`http://localhost:5000/Appointments/${loggedUser?.email}`)
       .then((res) => res.json())
       .then((data) => setAppointmentData(data));
-  }, [1]);
+  }, []);
 
   const handleBookClick = (id) => {
     setAppointmentId(id); // Set roomId on button click

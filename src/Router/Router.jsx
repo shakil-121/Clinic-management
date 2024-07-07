@@ -6,6 +6,8 @@ import Registration from "../Pages/Registration/Registration";
 import DashboardLayout from "../dashboard/DashboardLayout/DashboardLayout";
 import UserDashboardHome from "../dashboard/User/UserDashboardHome/UserDashboardHome";
 import UserHistory from "../dashboard/User/UserHistory/UserHistory";
+import History from "../dashboard/Admin/History/History";
+import AdminHomeDashboard from "../dashboard/Admin/AdminHomeDashboard/AdminHomeDashboard";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "userHistory",
         element: <UserHistory />,
+      },
+      {
+        path: "history",
+        element: <History />,
+      },
+      {
+        path: "adminDashboard",
+        element: <AdminHomeDashboard />,
       },
     ],
   },
